@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="nome">Name</string>
+    <string name="telefone">Phone</string>
+    <string name="endereco">Address</string>
+    <string name="site">Site</string>
+</resources>
