@@ -27,6 +27,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="Especiasi"
         tools:text="Especiais" />
 
     <TextView
@@ -39,6 +40,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/lista_pacote_especiais"
         app:layout_constraintTop_toBottomOf="@+id/lista_pacote_especiais"
+        android:text="Brasil"
         tools:text="Brasil" />
 
     <ListView

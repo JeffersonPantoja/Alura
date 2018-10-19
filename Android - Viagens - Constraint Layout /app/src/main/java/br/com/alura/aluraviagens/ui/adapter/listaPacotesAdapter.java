@@ -14,11 +14,14 @@ import java.util.List;
 
 import br.com.alura.aluraviagens.R;
 import br.com.alura.aluraviagens.model.Pacote;
+import br.com.alura.aluraviagens.util.DiasUtil;
+import br.com.alura.aluraviagens.util.MoedaUtil;
+import br.com.alura.aluraviagens.util.ResourceUtil;
 
 public class listaPacotesAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Pacote> pacotes;
+    private final Context context;
+    private final List<Pacote> pacotes;
 
     public listaPacotesAdapter(Context context, List<Pacote> Pacotes) {
         this.context = context;
@@ -46,22 +49,36 @@ public class listaPacotesAdapter extends BaseAdapter {
 
         Pacote pacote = pacotes.get(position);
 
-        TextView nomeCidade = view.findViewById(R.id.item_pacote_nome_cidade);
-        nomeCidade.setText(pacote.getLocal());
-
-        TextView numeroDias = view.findViewById(R.id.item_pacote_numero_dias);
-        numeroDias.setText(pacote.getDias() + " Dias");
-
-        TextView preco = view.findViewById(R.id.item_pacote_preco);
-        preco.setText(pacote.getPreco().toString());
-
-        Resources resources = context.getResources();
-        int idDrawble = resources.getIdentifier(pacote.getImagem(),"drawable",context.getPackageName());
-        Drawable drawable = resources.getDrawable(idDrawble);
-        ImageView imagem = view.findViewById(R.id.item_pacote_imagem);
-        imagem.setImageDrawable(drawable);
-
+        bidinDeCidade(view, pacote);
+        bidinDeDias(view, pacote);
+        bidinDePreco(view, pacote);
+        bidinDeImagem(view, pacote);
 
         return view;
     }
+
+    private void bidinDeCidade(View view, Pacote pacote) {
+        TextView nomeCidade = view.findViewById(R.id.item_pacote_nome_cidade);
+        nomeCidade.setText(pacote.getLocal());
+    }
+
+    private void bidinDePreco(View view, Pacote pacote) {
+        TextView preco = view.findViewById(R.id.item_pacote_preco);
+        String moedaBrasileira = MoedaUtil.formataParaBrasileiro(pacote.getPreco());
+        preco.setText(moedaBrasileira);
+    }
+
+    private void bidinDeImagem(View view, Pacote pacote) {
+        ImageView imagem = view.findViewById(R.id.item_pacote_imagem);
+        Drawable drawable = ResourceUtil.devolveDrawable(context,pacote.getImagem());
+        imagem.setImageDrawable(drawable);
+    }
+
+    private void bidinDeDias(View view, Pacote pacote) {
+        TextView numeroDias = view.findViewById(R.id.item_pacote_numero_dias);
+        String diasEmTexto = DiasUtil.formataEmTexto(pacote.getDias());
+        numeroDias.setText(diasEmTexto);
+    }
+
+
 }
