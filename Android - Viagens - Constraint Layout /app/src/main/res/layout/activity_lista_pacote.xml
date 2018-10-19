@@ -10,7 +10,7 @@
         android:id="@+id/lista_pacote_baner"
         android:layout_width="0dp"
         android:layout_height="120dp"
-        android:background="@android:color/holo_purple"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/baner_do_pacote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,10 +24,10 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Especiasi"
+        app:layout_constraintLeft_toLeftOf="@id/lista_pacote_baner"
+        app:layout_constraintRight_toRightOf="@id/lista_pacote_baner"
+        app:layout_constraintTop_toTopOf="@id/lista_pacote_baner"
+        android:text="@string/especiais"
         tools:text="Especiais" />
 
     <TextView
@@ -40,7 +40,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/lista_pacote_especiais"
         app:layout_constraintTop_toBottomOf="@+id/lista_pacote_especiais"
-        android:text="Brasil"
+        android:text="@string/pais"
         tools:text="Brasil" />
 
     <ListView
@@ -48,6 +48,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
