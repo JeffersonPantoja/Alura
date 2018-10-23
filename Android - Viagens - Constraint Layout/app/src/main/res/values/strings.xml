@@ -15,6 +15,11 @@
     <string name="nome_no_cartao">Nome No Cartão</string>
     <string name="finalizar_compra">Finalizar Compra</string>
     <string name="mascara_nome_no_cartao">abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ\u0020</string>
+    <string name="descricao_banner_resumo_compra">banner com cor solida, laranja</string>
+    <string name="resumo_compra_info_sucesso">Compra realizada com sucesso :)</string>
+    <string name="parabens">Parabéns</string>
+    <string name="descrica_imagem_pacote">Imagem da cidade do pacote</string>
+    <string name="info_confira_rasultado">Confira o resultado da compra</string>
 
 
 </resources>

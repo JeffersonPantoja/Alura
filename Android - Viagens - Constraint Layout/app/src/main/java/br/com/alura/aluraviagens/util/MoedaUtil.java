@@ -10,7 +10,7 @@ import java.util.Locale;
 public class MoedaUtil {
 
     @NonNull
-    public static String formataParaBrasileiro(BigDecimal valor) {
+    public static String formataParaBrasileiro(double valor) {
         NumberFormat formatadorBrasileiro = DecimalFormat.getCurrencyInstance(new Locale("pt","br"));
         return formatadorBrasileiro
                 .format(valor)
