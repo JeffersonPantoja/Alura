@@ -19,7 +19,7 @@ class ListaTransacoesActivity : AppCompatActivity(){
 
         val transacoes = listOf(
             Transacao(valor = BigDecimal(500), tipo = Tipo.DESPESA, data = Calendar.getInstance()),
-            Transacao(valor = BigDecimal(1000), categoria = "Esporte", tipo = Tipo.RECEITA)
+            Transacao(valor = BigDecimal(1000), categoria = "Categoria esporte que vai ficar grandão", tipo = Tipo.RECEITA)
         )
 
         lista_transacoes_listview.adapter = ListaTransacoesAdapter(this,transacoes)
