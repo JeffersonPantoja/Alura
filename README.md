@@ -12,4 +12,4 @@ Projetos feitos a partir das aulas
 
 ## Desenvolvimento Mobile com Kotlin
 
-- Finanças (**Em andamento**)
+- Finanças (**Fazendo a segunda parte**)
