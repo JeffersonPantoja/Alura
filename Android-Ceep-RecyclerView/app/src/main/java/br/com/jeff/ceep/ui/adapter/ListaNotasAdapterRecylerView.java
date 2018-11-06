@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import br.com.jeff.ceep.R;
 import br.com.jeff.ceep.model.Nota;
 import br.com.jeff.ceep.ui.holder.NotaViewHolder;
 
-public class ListaNotasAdapterRecylerView extends RecyclerView.Adapter {
+public class ListaNotasAdapterRecylerView extends RecyclerView.Adapter<NotaViewHolder> {
     private Context context;
     private List<Nota> notas;
 
@@ -25,18 +24,15 @@ public class ListaNotasAdapterRecylerView extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public NotaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_nota,viewGroup, false);
         return new NotaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int posicao) {
+    public void onBindViewHolder(@NonNull NotaViewHolder viewHolder, int posicao) {
         Nota nota = notas.get(posicao);
-        TextView titulo = viewHolder.itemView.findViewById(R.id.item_nota_titulo);
-        titulo.setText(nota.getTitulo());
-        TextView descricao = viewHolder.itemView.findViewById(R.id.item_nota_descricao);
-        descricao.setText(nota.getDescricao());
+        viewHolder.preencheCampos(nota);
     }
 
     @Override

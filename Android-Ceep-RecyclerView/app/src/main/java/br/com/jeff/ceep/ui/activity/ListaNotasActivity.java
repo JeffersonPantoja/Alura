@@ -1,5 +1,6 @@
 package br.com.jeff.ceep.ui.activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,16 +20,30 @@ public class ListaNotasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_notas);
 
-
-        RecyclerView listaNotas = findViewById(R.id.recyclerviewlist);
-
-        NotaDAO notaDAO = new NotaDAO();
-        notaDAO.insere(new Nota("Primeira nota", "Descrição da primeira nota"));
-
-        ListaNotasAdapterRecylerView listaNotasAdapter = new ListaNotasAdapterRecylerView(this, notaDAO.todos());
-        listaNotas.setAdapter(listaNotasAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        listaNotas.setLayoutManager(linearLayoutManager);
+        NotaDAO notaDAO = notasDeExemplo();
+        configuraRecyclerView(notaDAO);
 
     }
+
+    @NonNull
+    private NotaDAO notasDeExemplo() {
+        NotaDAO notaDAO = new NotaDAO();
+        notaDAO.insere(new Nota("Primeira nota", "Descrição da primeira nota"));
+        return notaDAO;
+    }
+
+    private void configuraRecyclerView(NotaDAO notaDAO) {
+        RecyclerView listaNotas = findViewById(R.id.recyclerviewlist);
+        configuraAdapter(notaDAO, listaNotas);
+//        configuraLayoutManager(listaNotas);
+    }
+
+    private void configuraAdapter(NotaDAO notaDAO, RecyclerView listaNotas) {
+        listaNotas.setAdapter(new ListaNotasAdapterRecylerView(this, notaDAO.todos()));
+    }
+
+//    private void configuraLayoutManager(RecyclerView listaNotas) {
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        listaNotas.setLayoutManager(linearLayoutManager);
+//    }
 }
