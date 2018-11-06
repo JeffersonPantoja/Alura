@@ -9,8 +9,7 @@ Projetos feitos a partir das aulas
 - Ceep, Recycler Views (**Em andamento**)
 
 - Links:
-[parcelable](https://medium.com/@lucas_marciano/por-que-usar-o-parcelable-ao-inv%C3%A9s-do-serializable-5f7543a9c7f3)
-
+[parcelable](https://medium.com/@lucas_marciano/por-que-usar-o-parcelable-ao-inv%C3%A9s-do-serializable-5f7543a9c7f3), 
 [sample date](https://android.jlelse.eu/android-tools-attributes-listitem-sample-data-rocks-bbf49aaa9f07)
 
 ## Desenvolvimento Mobile com Kotlin
