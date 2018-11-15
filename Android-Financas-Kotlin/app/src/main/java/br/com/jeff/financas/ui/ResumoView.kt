@@ -1,29 +1,55 @@
 package br.com.jeff.financas.ui
 
+import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.view.View
 import br.com.jeff.financas.Extension.formataParaBrasileiro
+import br.com.jeff.financas.R
 import br.com.jeff.financas.model.Resumo
 import br.com.jeff.financas.model.Transacao
 import kotlinx.android.synthetic.main.resumo_card.view.*
+import java.math.BigDecimal
 
-class ResumoView(private val view: View,transacoes: List<Transacao>){
+class ResumoView(
+    context: Context,
+    private val view: View,
+    transacoes: List<Transacao>
+) {
 
-
-    val resumo: Resumo = Resumo(transacoes)
+    private val resumo: Resumo = Resumo(transacoes)
+    private val corReceita = ContextCompat.getColor(context, R.color.receita)
+    private val corDespesa = ContextCompat.getColor(context, R.color.despesa)
 
     fun adicionaReceita() {
         val receita = resumo.receita()
-        view.resumo_card_receita.text = receita.formataParaBrasileiro()
+        with(view.resumo_card_receita) {
+            text = receita.formataParaBrasileiro()
+            setTextColor(corReceita)
+        }
     }
 
     fun aidicionaDespesa() {
         var despesa = resumo.despesa()
-        view.resumo_card_despesa.text = despesa.formataParaBrasileiro()
+        with(view.resumo_card_despesa) {
+            text = despesa.formataParaBrasileiro()
+            setTextColor(corDespesa)
+        }
     }
 
-    fun adicionaTotal(){
+    fun adicionaTotal() {
         val total = resumo.total()
-        view.resumo_card_total.text = total.formataParaBrasileiro()
+        val cor = corPor(total)
+        with(view.resumo_card_total) {
+            text = total.formataParaBrasileiro()
+            setTextColor(cor)
+        }
+    }
+
+    private fun corPor(total: BigDecimal): Int {
+        if (total >= BigDecimal.ZERO) {
+            return corReceita
+        }
+        return corDespesa
     }
 
 }

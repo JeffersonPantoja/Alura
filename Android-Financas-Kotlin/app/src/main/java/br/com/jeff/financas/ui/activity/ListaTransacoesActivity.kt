@@ -21,7 +21,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
         configuraAdapter(transacoes)
 
 
-        val resumoView = ResumoView(window.decorView,transacoes)
+        val resumoView = ResumoView(this, window.decorView, transacoes)
         resumoView.adicionaReceita()
         resumoView.aidicionaDespesa()
         resumoView.adicionaTotal()
