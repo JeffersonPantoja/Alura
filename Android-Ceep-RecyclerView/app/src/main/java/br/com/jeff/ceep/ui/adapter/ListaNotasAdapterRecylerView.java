@@ -13,15 +13,21 @@ import java.util.List;
 import br.com.jeff.ceep.R;
 import br.com.jeff.ceep.model.Nota;
 import br.com.jeff.ceep.ui.holder.NotaViewHolder;
+import br.com.jeff.ceep.ui.listener.OnNotaClickListener;
 
 public class ListaNotasAdapterRecylerView extends RecyclerView.Adapter<NotaViewHolder> {
     private Context context;
     private List<Nota> notas;
     private int count = 0;
+    private OnNotaClickListener onNotaClickListener;
 
     public ListaNotasAdapterRecylerView(Context context, List<Nota> notas) {
         this.context = context;
         this.notas = notas;
+    }
+
+    public void setOnNotaClickListener(OnNotaClickListener onNotaClickListener) {
+        this.onNotaClickListener = onNotaClickListener;
     }
 
     @NonNull
@@ -37,6 +43,12 @@ public class ListaNotasAdapterRecylerView extends RecyclerView.Adapter<NotaViewH
     public void onBindViewHolder(@NonNull NotaViewHolder viewHolder, int posicao) {
         Nota nota = notas.get(posicao);
         viewHolder.preencheCampos(nota);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onNotaClickListener.onNotaClick();
+            }
+        });
 
     }
 

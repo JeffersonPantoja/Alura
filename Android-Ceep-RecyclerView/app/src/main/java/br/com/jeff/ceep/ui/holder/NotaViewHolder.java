@@ -24,4 +24,8 @@ public class NotaViewHolder extends RecyclerView.ViewHolder {
         titulo.setText(nota.getTitulo());
         descricao.setText(nota.getDescricao());
     }
+
+    public void setOnNotaClick() {
+
+    }
 }
