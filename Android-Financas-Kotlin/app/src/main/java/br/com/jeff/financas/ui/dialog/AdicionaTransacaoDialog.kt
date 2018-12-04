@@ -19,95 +19,17 @@ import java.math.BigDecimal
 import java.util.*
 
 class AdicionaTransacaoDialog(
-    val viewGroup: ViewGroup,
-    val context: Context
-) {
-    private val viewCriada = criarLayout()
-    private val campoData = viewCriada.form_transacao_data
-    private val campoValor = viewCriada.form_transacao_valor
-    private val campoCategoria = viewCriada.form_transacao_categoria
+    viewGroup: ViewGroup,
+    context: Context
+) : FormularioTransacaoDialog(viewGroup,context) {
 
-    private fun criarLayout() = LayoutInflater.from(context)
-            .inflate(R.layout.form_transacao, viewGroup, false)
+    override val botaoPositivo: String
+        get() = "Adicionar"
 
-    fun chama(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
-        configuraCampoData()
-        configuraCampoCategoria(tipo)
-        configuraFormulario(tipo, transacaoDelegate)
-    }
-
-    private fun configuraCampoData() {
-        val hoje = Calendar.getInstance()
-        campoData.setText(hoje.formataParaBrasileiro())
-
-        val ano = hoje.get(Calendar.YEAR)
-        val mes = hoje.get(Calendar.MONTH)
-        val dia = hoje.get(Calendar.DAY_OF_MONTH)
-
-        campoData.setOnClickListener {
-            DatePickerDialog(context, { _, ano, mes, dia ->
-                val dataSelecionada = Calendar.getInstance()
-                dataSelecionada.set(ano, mes, dia)
-                campoData.setText(dataSelecionada.formataParaBrasileiro())
-            }, ano, mes, dia).show()
-        }
-    }
-
-    private fun configuraCampoCategoria(tipo: Tipo) {
-
-        val categorias = categoriaPor(tipo)
-        val adapter = ArrayAdapter.createFromResource(
-            context,
-            categorias,
-            android.R.layout.simple_spinner_dropdown_item
-        )
-        campoCategoria.adapter = adapter
-    }
-
-
-    private fun configuraFormulario(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
-
-        val titulo = tituloPor(tipo)
-
-        AlertDialog.Builder(context)
-            .setTitle(titulo)
-            .setView(viewCriada)
-            .setPositiveButton("Adicionar") { _, _ ->
-                val valorEmTexto = campoValor.text.toString()
-                val dataEmTexto = campoData.text.toString()
-                val categoriaEmTexto = campoCategoria.selectedItem.toString()
-
-                val valor = converteCampoValor(valorEmTexto)
-                val data = dataEmTexto.converteParaCalendar()
-                val transacaoCriada = Transacao(valor, categoriaEmTexto, tipo, data)
-                transacaoDelegate.delegate(transacaoCriada)
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
-    }
-
-    private fun converteCampoValor(valorEmTexto: String): BigDecimal {
-        val valor = try {
-            BigDecimal(valorEmTexto)
-        } catch (exception: Exception) {
-            Toast.makeText(context, "Erro de conversão", Toast.LENGTH_SHORT).show()
-            BigDecimal.ZERO
-        }
-        return valor
-    }
-
-    private fun categoriaPor(tipo: Tipo): Int {
-        if (tipo == Tipo.RECEITA) {
-            return R.array.categorias_de_receita
-        }
-        return R.array.categorias_de_despesa
-    }
-
-    private fun tituloPor(tipo: Tipo): Int {
+    override fun tituloPor(tipo: Tipo): Int {
         if (tipo == Tipo.RECEITA) {
             return R.string.adiciona_receita
         }
         return R.string.adiciona_despesa
     }
-
 }

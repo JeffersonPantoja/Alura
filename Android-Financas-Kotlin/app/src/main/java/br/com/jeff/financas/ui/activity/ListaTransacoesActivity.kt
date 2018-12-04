@@ -1,9 +1,7 @@
 package br.com.jeff.financas.ui.activity
 
 import android.os.Bundle
-
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.view.ViewGroup
 import br.com.jeff.financas.R
 import br.com.jeff.financas.model.Tipo
@@ -14,6 +12,7 @@ import br.com.jeff.financas.ui.delegate.TransacaoDelegate
 import br.com.jeff.financas.ui.dialog.AdicionaTransacaoDialog
 import br.com.jeff.financas.ui.dialog.AlteraTransacaoDialog
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
+
 class ListaTransacoesActivity : AppCompatActivity() {
 
     private val transacoes: MutableList<Transacao> = mutableListOf()
