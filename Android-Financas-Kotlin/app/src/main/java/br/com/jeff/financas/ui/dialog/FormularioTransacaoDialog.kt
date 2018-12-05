@@ -28,10 +28,10 @@ abstract class FormularioTransacaoDialog(private val viewGroup: ViewGroup, priva
     private fun criarLayout() = LayoutInflater.from(context)
         .inflate(R.layout.form_transacao, viewGroup, false)
 
-    fun chama(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
+    fun chama(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
         configuraCampoData()
         configuraCampoCategoria(tipo)
-        configuraFormulario(tipo, transacaoDelegate)
+        configuraFormulario(tipo, delegate)
     }
 
     private fun configuraCampoData() {
@@ -63,7 +63,7 @@ abstract class FormularioTransacaoDialog(private val viewGroup: ViewGroup, priva
         campoCategoria.adapter = adapter
     }
 
-    private fun configuraFormulario(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
+    private fun configuraFormulario(tipo: Tipo, delegate: (transacao: Transacao) -> Unit) {
 
         val titulo = tituloPor(tipo)
 
@@ -78,7 +78,7 @@ abstract class FormularioTransacaoDialog(private val viewGroup: ViewGroup, priva
                 val valor = converteCampoValor(valorEmTexto)
                 val data = dataEmTexto.converteParaCalendar()
                 val transacaoCriada = Transacao(valor, categoriaEmTexto, tipo, data)
-                transacaoDelegate.delegate(transacaoCriada)
+                delegate(transacaoCriada)
             }
             .setNegativeButton("Cancelar", null)
             .show()

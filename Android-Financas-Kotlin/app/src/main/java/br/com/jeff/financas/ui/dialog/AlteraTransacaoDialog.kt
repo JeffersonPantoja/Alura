@@ -15,10 +15,10 @@ class AlteraTransacaoDialog(
     override val botaoPositivo: String
         get() = "Alterar"
 
-    fun chama(transacao: Transacao, transacaoDelegate: TransacaoDelegate) {
+    fun chama(transacao: Transacao, delegate: (transacao: Transacao) -> Unit) {
 
         val tipo = transacao.tipo
-        super.chama(tipo, transacaoDelegate)
+        super.chama(tipo, delegate)
 
         inicializaCampos(transacao)
     }

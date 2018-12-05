@@ -46,13 +46,12 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun chamaDialogDeAdicao(tipo: Tipo) {
         AdicionaTransacaoDialog(viewDaActivity, this)
-            .chama(tipo, object : TransacaoDelegate {
-                override fun delegate(transacao: Transacao) {
-                    adiciona(transacao)
-                    lista_transacoes_adiciona_menu.close(true)
-                }
-            })
+            .chama(tipo) {transacaoCriada ->
+                adiciona(transacaoCriada)
+                lista_transacoes_adiciona_menu.close(true)
+            }
     }
+
 
     private fun adiciona(transacao: Transacao) {
         transacoes.add(transacao)
@@ -81,13 +80,10 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private fun chamaDialogDeAlteracao(transacao: Transacao, posicao: Int) {
         AlteraTransacaoDialog(viewDaActivity, this)
-            .chama(transacao, object : TransacaoDelegate {
-                override fun delegate(transacao: Transacao) {
-                    altera(transacao, posicao)
-                    lista_transacoes_adiciona_menu.close(true)
-                }
-
-            })
+            .chama(transacao) {transacaoAlterada ->
+                altera(transacaoAlterada, posicao)
+                lista_transacoes_adiciona_menu.close(true)
+            }
     }
 
     private fun altera(transacao: Transacao, posicao: Int) {
