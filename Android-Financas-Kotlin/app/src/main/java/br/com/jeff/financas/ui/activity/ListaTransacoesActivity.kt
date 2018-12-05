@@ -2,7 +2,10 @@ package br.com.jeff.financas.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.AdapterView
 import br.com.jeff.financas.R
 import br.com.jeff.financas.model.Tipo
 import br.com.jeff.financas.model.Transacao
@@ -75,7 +78,26 @@ class ListaTransacoesActivity : AppCompatActivity() {
                 val transacao = transacoes[posicao]
                 chamaDialogDeAlteracao(transacao, posicao)
             }
+            setOnCreateContextMenuListener { menu, _, _ ->
+                menu.add(Menu.NONE,1,Menu.NONE,"Remover")
+            }
         }
+    }
+
+
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+        if(id == 1){
+            val adapterContextMenuInfo = item?.menuInfo as AdapterView.AdapterContextMenuInfo
+            val posicao = adapterContextMenuInfo.position
+            removeTransacaoPor(posicao)
+        }
+        return super.onContextItemSelected(item)
+    }
+
+    private fun removeTransacaoPor(posicao: Int) {
+        transacoes.removeAt(posicao)
+        atualizaTransacoes()
     }
 
     private fun chamaDialogDeAlteracao(transacao: Transacao, posicao: Int) {
