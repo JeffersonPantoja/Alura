@@ -17,3 +17,7 @@ Projetos feitos a partir das aulas
 ## Desenvolvimento Mobile com Kotlin
 
 - Finanças (**Finalizado**)
+
+## Curso Room: persistindo dados de maneira eficiente no Android
+
+- RoomApplication (**Em andamento**)
